@@ -1,0 +1,142 @@
+/* Reseteo básico y configuración del fondo */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Asegúrate de tener una imagen en la carpeta img, o usa una URL directa */
+    background: url('../img/background.jpg') no-repeat center center/cover;
+    background-color: #1a1a2e;
+    /* Color de respaldo */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+/* --- TEMA GLASSMORPHISM --- */
+.glass-panel,
+.glass-nav,
+.glass-footer {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: auto;
+}
+
+.glass-panel {
+    border-radius: 15px;
+    color: white;
+}
+
+/* Inputs y Botones Glass */
+.glass-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    box-shadow: none;
+    color: white;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.glass-btn {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    border: none;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.glass-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* --- TARJETA Y ANIMACIÓN 3D --- */
+.card-container {
+    perspective: 1000px;
+    /* Le da la profundidad 3D */
+    width: 350px;
+    height: 220px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    /* Permite que los hijos tengan 3D */
+}
+
+/* Clase que aplicaremos con JavaScript para voltear la tarjeta */
+.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    /* Oculta la parte de atrás cuando está rotada */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    padding: 0;
+}
+
+.black-stripe {
+    width: 100%;
+    height: 40px;
+    background: #000;
+}
+
+.cvv-box {
+    background: #fff;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* --- ANIMACIÓN PERSONALIZADA --- */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.custom-float-anim {
+    animation: float 4s ease-in-out infinite;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark glass-nav">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1 fw-bold">Mi Proyecto Checkout</span>
+        </div>
+    </nav>
+
+    <main class="container my-5 flex-grow-1 d-flex align-items-center">
+        <div class="row w-100 justify-content-center align-items-center">
+
+            <div class="col-md-6 d-flex justify-content-center mb-4 mb-md-0">
+                <div class="card-container">
+                    <div class="card-inner" id="cardInner">
+                        <div class="card-front glass-panel custom-float-anim">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa"
+                                    width="60">
+                            </div>
+                            <h3 id="card-number-display">#### #### #### ####</h3>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div>
+                                    <small>Titular</small>
+                                    <p id="card-holder-display" class="mb-0 fw-bold">NOMBRE APELLIDO</p>
+                                </div>
+                                <div>
+                                    <small>Expira</small>
+                                    <p id="card-expiry-display" class="mb-0 fw-bold">MM/YY</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back glass-panel">
+                            <div class="black-stripe mt-4"></div>
+                            <div class="cvv-box mt-4 mx-3 p-2 text-end text-dark fw-bold">
+                                <span id="card-cvv-display">***</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="checkout-form glass-panel p-4">
+                    <h4 class="mb-4 text-white">Detalles de Pago</h4>
+                    <form id="payment-form">
+                        <div class="mb-3">
+                            <label class="form-label text-white">Número de Tarjeta</label>
+                            <input type="text" class="form-control glass-input" id="cardNumber" maxlength="19"
+                                placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Titular de la Tarjeta</label>
+                            <input type="text" class="form-control glass-input" id="cardHolder" placeholder="Tu Nombre">
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label text-white">Expiración</label>
+                                <input type="text" class="form-control glass-input" id="cardExpiry" maxlength="5"
+                                    placeholder="MM/YY">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label text-white">CVV</label>
+                                <input type="password" class="form-control glass-input" id="cardCvv" maxlength="3"
+                                    placeholder="123">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100 mt-3 glass-btn">Pagar Ahora</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="glass-footer text-center py-3 text-white">
+        <p class="mb-0">Desarrollado con ❤️ por <strong>[Tu Nombre/Alias]</strong> | 2026</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
