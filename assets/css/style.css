@@ -140,3 +140,9 @@ body {
 .custom-float-anim {
     animation: float 4s ease-in-out infinite;
 }
+
+/* --- ESTILO PARA ERRORES DE VALIDACIÓN --- */
+.glass-input.border-danger {
+    border: 2px solid #ff4d4d !important;
+    background: rgba(255, 77, 77, 0.1) !important;
+}

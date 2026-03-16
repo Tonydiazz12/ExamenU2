@@ -35,15 +35,59 @@ document.addEventListener('DOMContentLoaded', () => {
         cardHolderDisplay.innerText = val === '' ? 'NOMBRE APELLIDO' : val;
     });
 
-    // 3. Actualizar Expiración
+// 3. Actualizar Expiración y Validar
     cardExpiryInput.addEventListener('input', (e) => {
-        let val = e.target.value;
-        // Agrega automáticamente la diagonal al mes
-        if (val.length === 2 && !val.includes('/')) {
-            e.target.value = val + '/';
-            val = val + '/';
+        const errorText = document.getElementById('expiry-error');
+
+        // SOLUCIÓN AL MÓVIL: Si el usuario está borrando texto, dejamos que borre de forma natural y salimos de la función
+        if (e.inputType === 'deleteContentBackward') {
+            cardExpiryDisplay.innerText = e.target.value === '' ? 'MM/YY' : e.target.value;
+            // Ocultamos el error si empieza a borrar
+            e.target.classList.remove('border-danger');
+            errorText.style.display = 'none';
+            return; 
         }
-        cardExpiryDisplay.innerText = val === '' ? 'MM/YY' : val;
+
+        // Quitamos cualquier cosa que no sea número para evitar que escriban letras
+        let val = e.target.value.replace(/\D/g, ''); 
+        
+        // Formateo: Si ya escribieron 2 números o más, ponemos la diagonal automáticamente
+        if (val.length >= 2) {
+            val = val.substring(0, 2) + '/' + val.substring(2, 4);
+        }
+        
+        e.target.value = val; // Actualizamos el input
+        cardExpiryDisplay.innerText = val === '' ? 'MM/YY' : val; // Actualizamos la tarjeta visual
+
+        // --- LÓGICA DE VALIDACIÓN (Se ejecuta solo cuando terminan de escribir MM/YY) ---
+        if (val.length === 5) {
+            // Extraemos el mes y el año de lo que escribió el usuario
+            const mesInput = parseInt(val.substring(0, 2));
+            const anioInput = parseInt("20" + val.substring(3, 5)); // Convertimos "26" a 2026
+
+            // Obtenemos la fecha actual del sistema
+            const fechaActual = new Date();
+            const mesActual = fechaActual.getMonth() + 1; // Sumamos 1 porque en JS enero es 0
+            const anioActual = fechaActual.getFullYear();
+
+            // 1. Verificamos si escribieron un mes que no existe (ej. 13)
+            if (mesInput < 1 || mesInput > 12) {
+                e.target.classList.add('border-danger');
+                errorText.innerText = "Mes inválido";
+                errorText.style.display = 'block';
+            } 
+            // 2. Verificamos si la tarjeta ya expiró
+            else if (anioInput < anioActual || (anioInput === anioActual && mesInput < mesActual)) {
+                e.target.classList.add('border-danger');
+                errorText.innerText = "Tarjeta expirada";
+                errorText.style.display = 'block';
+            } 
+            // 3. Si todo está correcto, quitamos las alertas
+            else {
+                e.target.classList.remove('border-danger');
+                errorText.style.display = 'none';
+            }
+        }
     });
 
     // 4. Actualizar CVV
